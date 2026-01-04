@@ -60,9 +60,16 @@ let lastIteration = 0;
 let timeout = 500;
 
 forever(function () {
-    if (caterpillarHead.left < 0 || caterpillarHead.right > screen.width
-        || caterpillarHead.top < 0 || caterpillarHead.bottom > screen.height) {
-        game.over(false);
+    if (caterpillarHead.left < 0) {
+        caterpillarHead.right = screen.width;
+    } else if (caterpillarHead.right > screen.width) {
+        caterpillarHead.left = 0;
+    }
+
+    if (caterpillarHead.top < 0) {
+        caterpillarHead.bottom = screen.height;
+    } else if (caterpillarHead.bottom > screen.height) {
+        caterpillarHead.top = 0;
     }
 
     if (!enqueued && game.runtime() - lastIteration < timeout) {
